@@ -1,0 +1,66 @@
+{
+  "name": "@danielherrerohernando/matteoaffinity-storybook",
+  "version": "1.0.0",
+  "description": "Storybook for components used in MatteoAffinity",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "bundle": "webpack --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production",
+    "check-types": "tsc",
+    "storybook": "start-storybook",
+    "build-storybook": "build-storybook -c .storybook -o storybookBuild",
+    "lint": "eslint ./src/*",
+    "lint:fix": "eslint --fix ./src/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielherrerohernando/reviews-manager.git"
+  },
+  "keywords": [
+    "react",
+    "typescript"
+  ],
+  "author": "Daniel Herrero Hernando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielherrerohernando/reviews-manager/issues"
+  },
+  "homepage": "https://github.com/danielherrerohernando/reviews-manager#readme",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@storybook/addon-knobs": "^5.3.13",
+    "@storybook/preset-typescript": "^1.2.0",
+    "@storybook/react": "^5.3.13",
+    "@types/react": "^16.9.20",
+    "@types/react-dom": "^16.9.5",
+    "@types/styled-components": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-react-app": "^9.1.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-react": "^7.18.3",
+    "fork-ts-checker-webpack-plugin": "^4.0.4",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.2.3",
+    "react-docgen-typescript-loader": "^3.6.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "dependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "styled-components": "^5.0.1"
+  }
+}
