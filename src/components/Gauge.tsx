@@ -5,6 +5,7 @@ interface ContainerProps {
 	diameter: number;
 }
 interface SemiCircleProps {
+	data: number;
 	thickness: number;
 	color?: string;
 	innerColor?: string;
@@ -17,8 +18,8 @@ interface SemiCircleMaskProps {
 }
 
 const Container = styled.div`
-	width: ${(props: ContainerProps): string => props.diameter+'px'};
-	height: ${(props: ContainerProps): string => props.diameter/2+'px'};
+	width: ${({diameter}: ContainerProps): string => diameter+'px'};
+	height: ${({diameter}: ContainerProps): string => diameter/2+'px'};
 	overflow: visible;
 	position: relative;
 `
@@ -31,12 +32,14 @@ const Mask = styled.div`
 `
 const SemiCircle = styled.div`
 	position: relative;
-	background-color: ${(props: ContainerProps & SemiCircleProps): string => props.color || '#40e6ae'};
+	background-color: ${({color, data}): string => {
+		const dataToColor = (val: number): string => val < 50 ? '#d90e00' : (val < 75 ? '#d9cb00' : '#40e6ae')
+		return color || dataToColor(data)}};
 
 	display: block;
 	width: 100%;
 	height: 100%;
-
+	transition: all .3s ease-in-out;
 	border-radius: 50% 50% 50% 50% / 100% 100% 0% 0% ;
 
 	&::before {
@@ -59,12 +62,12 @@ const SemiCircleMask = styled.div`
 	top: 0;
 	left: 0;
 
-	width: ${(props: ContainerProps & SemiCircleProps & SemiCircleMaskProps): string => props.diameter+'px'};
-	height: ${(props: ContainerProps & SemiCircleProps & SemiCircleMaskProps): string => props.diameter+'px'};
+	width: ${({diameter}): string => diameter+'px'};
+	height: ${({diameter}): string => diameter+'px'};
 
 	background: transparent;
 
-	transform: ${(props: ContainerProps & SemiCircleProps & SemiCircleMaskProps): string => `rotate(${props.data}deg)`};
+	transform: ${({data}): string => `rotate(${data}deg)`};
 	transform-origin: center center;
 	backface-visibility: hidden;
 	transition: all .3s ease-in-out;
@@ -103,7 +106,7 @@ export const Gauge: FunctionComponent<ContainerProps & SemiCircleProps & SemiCir
 	return (
 		<Container diameter={diameter} >
 			<Mask >
-				<SemiCircle color={color} innerColor={innerColor} diameter={diameter} thickness={thickness}></SemiCircle>
+				<SemiCircle color={color} data={data} innerColor={innerColor} diameter={diameter} thickness={thickness}></SemiCircle>
 				<SemiCircleMask diameter={diameter} backColor={backColor} thickness={thickness} data={dataToDeg(data)}></SemiCircleMask>
 			</Mask>
 			<NumDisplay>{dataToRate(data)}</NumDisplay>
