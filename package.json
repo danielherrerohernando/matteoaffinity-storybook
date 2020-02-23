@@ -14,7 +14,9 @@
     "lint": "eslint ./src/*",
     "lint:fix": "eslint --fix ./src/*"
   },
-  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "README.md"
