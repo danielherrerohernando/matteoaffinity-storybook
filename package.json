@@ -1,10 +1,10 @@
 {
   "name": "@danielherrerohernando/matteoaffinity-storybook",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Storybook for components used in MatteoAffinity",
-  "main": "dist/bundle.js",
+  "main": "dist/matteoaffinity-storybook.js",
   "scripts": {
-    "bundle": "webpack --mode development",
+    "build-dev": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
@@ -14,9 +14,14 @@
     "lint": "eslint ./src/*",
     "lint:fix": "eslint --fix ./src/*"
   },
+  "private": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danielherrerohernando/reviews-manager.git"
+    "url": "git+https://github.com/danielherrerohernando/matteoaffinity-storybook.git"
   },
   "keywords": [
     "react",
@@ -25,9 +30,9 @@
   "author": "Daniel Herrero Hernando",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/danielherrerohernando/reviews-manager/issues"
+    "url": "https://github.com/danielherrerohernando/matteoaffinity-storybook/issues"
   },
-  "homepage": "https://github.com/danielherrerohernando/reviews-manager#readme",
+  "homepage": "https://github.com/danielherrerohernando/matteoaffinity-storybook#readme",
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -49,7 +54,6 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-react": "^7.18.3",
     "fork-ts-checker-webpack-plugin": "^4.0.4",
-    "html-webpack-plugin": "^3.2.0",
     "husky": "^4.2.3",
     "react-docgen-typescript-loader": "^3.6.0",
     "ts-loader": "^6.2.1",
@@ -58,7 +62,7 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "styled-components": "^5.0.1"

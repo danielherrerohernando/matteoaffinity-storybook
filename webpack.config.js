@@ -1,44 +1,43 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const package = require('./package.json')
 
 module.exports = {
-
-
-  entry: './src/App.tsx',
-
-  // and output it into /dist as bundle.js
+  entry: './src/index.ts',
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js',
+    filename: 'matteoaffinity-storybook.js',
+    library: package.name,
+    libraryTarget: 'umd'
   },
-
-  // adding .ts and .tsx to resolve.extensions will help babel look for .ts and .tsx files to transpile
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
-
+  externals:{
+    react: {
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react',
+    },
+    "react-dom": {
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'react-dom',
+    },
+    "styled-components": {
+      commonjs: 'styled-components',
+      commonjs2: 'styled-components',
+      amd: 'styled-components',
+    },
+  },
   module: {
     rules: [
-
-        // we use babel-loader to load our jsx and tsx files
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         },
-      },
-
-      // css-loader to bundle all the css files into one file and style-loader to add all the styles  inside the style tag of the document
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    })
-  ]
+  }
 };

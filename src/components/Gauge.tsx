@@ -16,6 +16,12 @@ interface SemiCircleMaskProps {
 	dataToRate?: (val: number) => string;
 	backColor?: string;
 }
+interface NumberProps {
+	data: number;
+	numColor: string;
+}
+
+const dataToColor = (val: number): string => val < 50 ? '#d90e00' : (val < 75 ? '#d9cb00' : '#40e6ae')
 
 const Container = styled.div`
 	width: ${({diameter}: ContainerProps): string => diameter+'px'};
@@ -32,9 +38,7 @@ const Mask = styled.div`
 `
 const SemiCircle = styled.div`
 	position: relative;
-	background-color: ${({color, data}): string => {
-		const dataToColor = (val: number): string => val < 50 ? '#d90e00' : (val < 75 ? '#d9cb00' : '#40e6ae')
-		return color || dataToColor(data)}};
+	background-color: ${({color, data}): string => color || dataToColor(data)};
 
 	display: block;
 	width: 100%;
@@ -98,18 +102,21 @@ const NumDisplay = styled.span`
 	bottom: -40%;
 	left: 50%;
 	font-size: 4em;
-	color: black;
+	color: ${(props: NumberProps): string => props.numColor || dataToColor(props.data)};
 	z-index: 20;
+	transition: all .3s ease-in-out;
 	font-weight: bold;
 `
-export const Gauge: FunctionComponent<ContainerProps & SemiCircleProps & SemiCircleMaskProps> = ({data, dataToDeg=(val: number): number => val*1.8, dataToRate=(val: number): string => (val/10).toFixed(1) , color, innerColor, backColor, diameter, thickness}) => {
+const Gauge: FunctionComponent<ContainerProps & NumberProps & SemiCircleProps & SemiCircleMaskProps> = ({data, dataToDeg=(val: number): number => val*1.8, dataToRate=(val: number): string => (val/10).toFixed(1) , color, numColor, innerColor, backColor, diameter, thickness}) => {
 	return (
 		<Container diameter={diameter} >
 			<Mask >
 				<SemiCircle color={color} data={data} innerColor={innerColor} diameter={diameter} thickness={thickness}></SemiCircle>
 				<SemiCircleMask diameter={diameter} backColor={backColor} thickness={thickness} data={dataToDeg(data)}></SemiCircleMask>
 			</Mask>
-			<NumDisplay>{dataToRate(data)}</NumDisplay>
+			<NumDisplay data={data} numColor={numColor}>{dataToRate(data)}<span style={{fontWeight:300, fontSize:'.5em'}}>/10</span></NumDisplay>
 		</Container>
 	)
 }
+
+export default Gauge
